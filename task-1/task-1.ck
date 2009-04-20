@@ -25,7 +25,7 @@ while (true)
 {
   if (Math.rand2f(0.0, 1.0) < bassDrumTrack.probabilities[step % 16])
   {
-    bassDrum.keyOn();
+    bassDrum.keyOn(bassDrumTrack.gains[step % 16]);
   }
 
   sixteenth => now;
@@ -56,8 +56,9 @@ class BassDrum
 
   envB.set(1::ms, 30::ms, 0, 0::ms);
 
-  public void keyOn()
+  public void keyOn(float gain)
   {
+    gain => oscA.gain;
     envA.keyOn();
     envB.keyOn();
   }
