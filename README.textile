@@ -1,0 +1,3 @@
+h1. Audio VU
+
+A collection of "ChucK":http://chuck.cs.princeton.edu/ programs which were developed in the course of "audio lecture":http://audiovu.piringer.net/.
