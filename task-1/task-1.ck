@@ -23,14 +23,12 @@ BassDrum bassDrum;
 0 => int step;
 while (true)
 {
-  if (Math.rand2f(0.0, 1.0) > bassDrumTrack.probabilities[step % 16])
+  if (Math.rand2f(0.0, 1.0) < bassDrumTrack.probabilities[step % 16])
   {
-    <<< step % 16 >>>;
     bassDrum.keyOn();
   }
 
   sixteenth => now;
-  bassDrum.keyOff();
 
   step++;
 }
