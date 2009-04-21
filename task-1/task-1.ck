@@ -98,12 +98,6 @@ class BassDrum
     envA.keyOn();
     envB.keyOn();
   }
-
-  public void keyOff()
-  {
-    envA.keyOff();
-    envB.keyOff();
-  }
 }
 
 class SnareDrum
@@ -127,12 +121,6 @@ class SnareDrum
     envA.keyOn();
     envB.keyOn();
   }
-
-  public void keyOff()
-  {
-    envA.keyOff();
-    envB.keyOff();
-  }
 }
 
 class HiHat
@@ -155,11 +143,5 @@ class HiHat
     gain => oscA.gain;
     envA.keyOn();
     envB.keyOn();
-  }
-
-  public void keyOff()
-  {
-    envA.keyOff();
-    envB.keyOff();
   }
 }
