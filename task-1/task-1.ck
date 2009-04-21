@@ -79,7 +79,10 @@ class Track
 
 class BassDrum
 {
-  SinOsc oscB => ADSR envB => SinOsc oscA => ADSR envA => dac;
+  SinOsc oscB => ADSR envB => SinOsc oscA => ADSR envA => Gain amp => dac;
+  amp => Delay delay => amp;
+  60::second / bpm / 4.0 => delay.delay;
+  0.05 => delay.gain;
 
   65 => oscA.freq;
   1 => oscA.gain;
@@ -102,7 +105,10 @@ class BassDrum
 
 class SnareDrum
 {
-  SinOsc oscB => ADSR envB => SinOsc oscA => ADSR envA => dac;
+  SinOsc oscB => ADSR envB => SinOsc oscA => ADSR envA => Gain amp => dac;
+  amp => Delay delay => amp;
+  60::second / bpm / 4.0 => delay.delay;
+  0.07 => delay.gain;
 
   288 => oscA.freq;
   0.7 => oscA.gain;
@@ -125,7 +131,10 @@ class SnareDrum
 
 class HiHat
 {
-  SinOsc oscB => ADSR envB => SinOsc oscA => ADSR envA => dac;
+  SinOsc oscB => ADSR envB => SinOsc oscA => ADSR envA => Gain amp => dac;
+  amp => Delay delay => amp;
+  60::second / bpm / 4.0 => delay.delay;
+  0.05 => delay.gain;
 
   500 => oscA.freq;
   0.7 => oscA.gain;
