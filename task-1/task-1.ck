@@ -1,44 +1,44 @@
 // Set tempo
-160.0 => float bpm;
+170.0 => float bpm;
 60::second / bpm / 4.0 => dur sixteenth;
 
 // Create tracks
 
 Track bassDrumTrack;
 
-[0.7, 0.0, 0.0, 0.3,
+[0.7, 2.0, 0.0, 0.3,
  0.0, 0.0, 1.0, 0.0,
- 0.0, 0.0, 0.0, 0.0,
+ 0.6, 0.5, 0.0, 0.0,
  0.0, 0.0, 0.0, 0.3] @=> bassDrumTrack.probabilities;
 
-[0.6, 0.0, 0.0, 0.6,
+[0.6, 0.4, 0.0, 0.6,
  0.0, 0.0, 1.0, 0.0,
- 0.0, 0.0, 0.0, 0.0,
- 0.0, 0.0, 0.0, 0.4] @=> bassDrumTrack.gains;
+ 0.4, 0.2, 0.0, 0.0,
+ 0.0, 0.0, 0.0, 0.3] @=> bassDrumTrack.gains;
 
 Track snareDrumTrack;
 
 [0.0, 0.0, 0.0, 0.0,
- 0.9, 0.0, 0.0, 0.0,
+ 0.9, 0.2, 0.0, 0.6,
  0.0, 0.0, 0.0, 0.0,
- 0.9, 0.0, 0.0, 0.0] @=> snareDrumTrack.probabilities;
+ 0.9, 0.2, 0.0, 0.0] @=> snareDrumTrack.probabilities;
 
 [0.0, 0.0, 0.0, 0.0,
- 0.7, 0.0, 0.0, 0.0,
+ 0.7, 0.4, 0.0, 0.6,
  0.0, 0.0, 0.0, 0.0,
- 0.7, 0.0, 0.0, 0.0] @=> snareDrumTrack.gains;
+ 0.7, 0.4, 0.0, 0.0] @=> snareDrumTrack.gains;
 
 Track hiHatTrack;
 
-[0.9, 0.0, 0.3, 0.0,
- 0.9, 0.0, 0.3, 0.0,
- 0.9, 0.0, 0.3, 0.0,
- 0.9, 0.0, 0.7, 0.0] @=> hiHatTrack.probabilities;
+[0.9, 0.3, 0.3, 0.3,
+ 0.9, 0.3, 0.3, 0.3,
+ 0.9, 0.3, 0.3, 0.3,
+ 0.9, 0.3, 0.7, 0.3] @=> hiHatTrack.probabilities;
 
-[0.3, 0.0, 0.3, 0.0,
- 0.3, 0.0, 0.3, 0.0,
- 0.3, 0.0, 0.3, 0.0,
- 0.3, 0.0, 0.3, 0.0] @=> hiHatTrack.gains;
+[0.3, 0.1, 0.3, 0.1,
+ 0.3, 0.1, 0.3, 0.1,
+ 0.3, 0.1, 0.3, 0.1,
+ 0.3, 0.1, 0.3, 0.1] @=> hiHatTrack.gains;
 
 // Create instruments
 BassDrum bassDrum;
