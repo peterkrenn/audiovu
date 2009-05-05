@@ -1,13 +1,17 @@
+second / samp => float sampleRate;
 3::second => dur bufferLength;
+float buffer[(bufferLength / samp) $ int];
 
-adc => LiSa buffer => dac;
-bufferLength => buffer.duration;
+adc => blackhole;
 
 function void record()
 {
-  1 => buffer.record;
-  bufferLength => now;
-  0 => buffer.record;
+  now => time startTime;
+  for (0 => int position; now < startTime + bufferLength; position++)
+  {
+    adc.last() => buffer[position];
+    1::samp => now;
+  }
 }
 
 function void keyboardTracker()
@@ -37,6 +41,9 @@ spork ~ keyboardTracker();
 
 while (true)
 {
-  1 => buffer.play;
-  bufferLength => now;
+  for (0 => int position; position < buffer.cap(); position++)
+  {
+    buffer[position] => dac.next;
+    1::samp => now;
+  }
 }
