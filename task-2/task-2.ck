@@ -10,8 +10,33 @@ function void record()
   0 => buffer.record;
 }
 
-record();
+function void keyboardTracker()
+{
+  Hid hid;
+  hid.openKeyboard(0);
+  HidMsg hidMsg;
 
-1 => buffer.play;
+  while (true)
+  {
+    hid => now;
 
-bufferLength => now;
+    while (hid.recv(hidMsg))
+    {
+      if (hidMsg.isButtonDown())
+      {
+        if (hidMsg.ascii == 82)
+        {
+          spork ~ record();
+        }
+      }
+    }
+  }
+}
+
+spork ~ keyboardTracker();
+
+while (true)
+{
+  1 => buffer.play;
+  bufferLength => now;
+}
