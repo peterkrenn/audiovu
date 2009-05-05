@@ -1,7 +1,7 @@
 3::second => dur bufferLength;
 float buffer[(bufferLength / samp) $ int];
 
-500::samp => dur grainLength;
+300::samp => dur grainLength;
 1 => float speed;
 
 adc => blackhole;
@@ -57,11 +57,21 @@ spork ~ keyboardTracker();
 
 function void playGrain(int start)
 {
-  Impulse generator => dac;
+  Impulse generator => ADSR envelope => dac;
+  envelope.set(30::samp, 0::samp, 0.9, 30::samp);
 
-  for (start => int position; position < start + (grainLength / samp) $ int; position++)
+  (grainLength / samp) $ int => int length;
+
+  envelope.keyOn();
+  for (start => int position; position < start + length + 30; position++)
   {
     buffer[position] => generator.next;
+
+    if (position > start + length)
+    {
+      envelope.keyOff();
+    }
+
     1::samp => now;
   }
 }
