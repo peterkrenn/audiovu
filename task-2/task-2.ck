@@ -3,6 +3,7 @@ float buffer[(bufferLength / samp) $ int];
 
 300::samp => dur grainLength;
 1 => float speed;
+1 => float pitch;
 
 adc => blackhole;
 
@@ -44,9 +45,11 @@ function void keyboardTracker()
         }
         else if (hidMsg.ascii == 87) // w
         {
+          0.1 -=> pitch;
         }
         else if (hidMsg.ascii == 83) // s
         {
+          0.1 +=> pitch;
         }
       }
     }
@@ -72,7 +75,7 @@ function void playGrain(int start)
       envelope.keyOff();
     }
 
-    1::samp => now;
+    pitch * 1::samp => now;
   }
 }
 
