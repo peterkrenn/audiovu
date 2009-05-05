@@ -1,6 +1,8 @@
-second / samp => float sampleRate;
 3::second => dur bufferLength;
 float buffer[(bufferLength / samp) $ int];
+
+500::samp => dur grainLength;
+1 => float speed;
 
 adc => blackhole;
 
@@ -28,9 +30,23 @@ function void keyboardTracker()
     {
       if (hidMsg.isButtonDown())
       {
-        if (hidMsg.ascii == 82)
+        if (hidMsg.ascii == 82) // r
         {
           spork ~ record();
+        }
+        else if (hidMsg.ascii == 65) // a
+        {
+          0.1 -=> speed;
+        }
+        else if (hidMsg.ascii == 68) // d
+        {
+          0.1 +=> speed;
+        }
+        else if (hidMsg.ascii == 87) // w
+        {
+        }
+        else if (hidMsg.ascii == 83) // s
+        {
         }
       }
     }
@@ -39,11 +55,24 @@ function void keyboardTracker()
 
 spork ~ keyboardTracker();
 
+function void playGrain(int start)
+{
+  Impulse generator => dac;
+
+  for (start => int position; position < start + (grainLength / samp) $ int; position++)
+  {
+    buffer[position] => generator.next;
+    1::samp => now;
+  }
+}
+
 while (true)
 {
-  for (0 => int position; position < buffer.cap(); position++)
+  0 => int position;
+  while (position < buffer.cap() - (grainLength / samp) $ int)
   {
-    buffer[position] => dac.next;
-    1::samp => now;
+    spork ~ playGrain(position);
+    Math.floor((grainLength / samp) $ int * speed) $ int +=> position;
+    grainLength => now;
   }
 }
